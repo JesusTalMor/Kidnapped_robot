@@ -1,0 +1,11 @@
+<!-- Launch para La Realización de Pruebas dentro de CAETEC -->
+<launch>
+  <!-- lanzar nodo amcl -->
+  <include file="$(find kidnapped_robot)/launch/amcl_pasillo_caetec.launch"/>
+  <!-- Lanzar nodo de Laser2Image -->
+  <node pkg="kidnapped_robot" type="Laser2image.py" name="Laser2image"/>
+  <!-- Lanzar Nodo de RVIZ -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kidnapped_robot)/rviz/pasillo_visual.rviz"/>
+  <!-- Lanzar Nodo Red Neuronal -->
+  <node pkg="kidnapped_robot" type="LeNet_node.py" name="LeNet_node" output="screen"/>
+</launch>

@@ -1,0 +1,9 @@
+<!-- Launch para realizar pruebas de LiDAR dentro de CAETEC -->
+<launch>
+  <!-- Lanzar nodo de Laser2Image -->
+  <node pkg="kidnapped_robot" type="Laser2image.py" name="Laser2image"/>
+  <!-- Lanzar Nodo de RVIZ -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find kidnapped_robot)/rviz/invernadero_visual.rviz"/>
+  <!-- Lanzar Nodo Red Neuronal -->
+  <node pkg="kidnapped_robot" type="LeNet_node.py" name="LeNet_node" output="screen"/>
+</launch>

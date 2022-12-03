@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- SIMULATION ARGUMENTS -->
+  <arg name="world" default="$(find kidnapped_robot)/worlds/real_CAETEC_greenhouse.world"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="recording" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="x" default="0"/>
+  <arg name="y" default="14.0"/>
+  <arg name="z" default="0.0"/>
+  <arg name="yaw" default="-1.57"/>
+  <arg name="front_laser" default="true" />
+  <arg name="default_config" value="front_laser" if="$(arg front_laser)" />
+  <arg name="default_config" value="base" unless="$(arg front_laser)" />
+  <arg name="config" default="$(arg default_config)" />
+
+  <!-- Gazebo empty world launch file -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" default="$(arg world)"/>
+    <arg name="paused" default="$(arg paused)"/>
+    <arg name="use_sim_time" default="$(arg use_sim_time)"/>
+    <arg name="gui" default="$(arg gui)"/>
+    <arg name="recording" default="$(arg recording)"/>
+    <arg name="debug" default="$(arg debug)"/>  
+  </include>
+
+  <!-- SPAWN JACKAL INSIDE SIMULATION -->
+  <include file="$(find jackal_gazebo)/launch/spawn_jackal.launch">
+    <arg name="x" value="$(arg x)"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="z" value="$(arg z)"/>
+    <arg name="yaw" value="$(arg yaw)"/>
+    <arg name="config" value="$(arg config)" />
+  </include>
+</launch>
